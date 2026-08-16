@@ -117,6 +117,14 @@ function App() {
     setShowLeaderboard(false)
   }
 
+  const handleViewLeaderboard = () => {
+    setShowLeaderboard(true)
+    window.requestAnimationFrame(() => {
+      const leaderboardElement = document.querySelector('.leaderboard-card')
+      leaderboardElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
+
   const clearLeaderboard = () => {
     const confirmed = window.confirm('Clear all locally stored scores?')
     if (!confirmed) {
@@ -157,7 +165,7 @@ function App() {
           incorrectClicks={state.incorrectClicks}
           completedTargets={state.completedTargets}
           onReplay={handleReplay}
-          onViewLeaderboard={() => setShowLeaderboard(true)}
+          onViewLeaderboard={handleViewLeaderboard}
           personalBest={personalBest}
           entries={leaderboard}
         />
