@@ -86,39 +86,45 @@ export function createTargetFromType(
   type: 'number' | 'color',
   tiles: Tile[],
 ): { target: Target; targetTileIds: Set<string> } {
+  // 1. Gather only active, unresolved tiles to avoid targeting cleared pieces
+  const activeTiles = tiles.filter((tile) => !tile.isResolved)
+
+  // 2. Absolute safety fallback if the board is completely empty or completely cleared
+  if (activeTiles.length === 0) {
+    if (type === 'number') {
+      const fallbackTarget: NumberTarget = { type: 'number', word: 'ZERO', value: 0 }
+      return { target: fallbackTarget, targetTileIds: new Set() }
+    } else {
+      const fallbackTarget: ColorTarget = { type: 'color', word: 'RED', targetColor: 'red' as TileColor }
+      return { target: fallbackTarget, targetTileIds: new Set() }
+    }
+  }
+
+  // 3. Pick a random active tile from the board to guarantee a valid match baseline
+  const baseTile = activeTiles[Math.floor(Math.random() * activeTiles.length)]
+
+  // 4. Construct the verified target based on the requested type
   if (type === 'number') {
-    const candidates = Array.from({ length: 10 }, (_, index) => ({
-      type: 'number' as const,
-      word: DIGIT_TO_WORD[index as Digit],
-      value: index as Digit,
-    }))
-
-    for (let index = 0; index < candidates.length; index += 1) {
-      const target = candidates[index]
-      const ids = findMatchingTileIds(tiles, target)
-      if (ids.length > 0) {
-        return { target, targetTileIds: new Set(ids) }
-      }
+    const value = baseTile.digit
+    const target: NumberTarget = {
+      type: 'number',
+      word: DIGIT_TO_WORD[value],
+      value,
     }
-
-    const fallbackTarget: NumberTarget = { type: 'number', word: 'ZERO', value: 0 }
-    return { target: fallbackTarget, targetTileIds: new Set(findMatchingTileIds(tiles, fallbackTarget)) }
+    return { target, targetTileIds: new Set(findMatchingTileIds(tiles, target)) }
   }
 
-  const candidateWords = ['RED', 'BLUE', 'GREEN', 'YELLOW'] as const
-  for (let attempt = 0; attempt < 50; attempt += 1) {
-    const word = candidateWords[Math.floor(Math.random() * candidateWords.length)]
-    const targetColor = randomColor()
-    const target: ColorTarget = { type: 'color', word, targetColor }
-    const ids = findMatchingTileIds(tiles, target)
-    if (ids.length > 0) {
-      return { target, targetTileIds: new Set(ids) }
-    }
+  // type === 'color'
+  const targetColor = baseTile.color
+  const word = randomColorWord() // The word is cosmetic; match logic only checks targetColor
+  const target: ColorTarget = {
+    type: 'color',
+    word,
+    targetColor,
   }
-
-  const fallbackTarget: ColorTarget = { type: 'color', word: 'RED', targetColor: 'red' }
-  return { target: fallbackTarget, targetTileIds: new Set(findMatchingTileIds(tiles, fallbackTarget)) }
+  return { target, targetTileIds: new Set(findMatchingTileIds(tiles, target)) }
 }
+
 
 export function calculateAccuracy(correct: number, incorrect: number): number {
   const total = correct + incorrect
