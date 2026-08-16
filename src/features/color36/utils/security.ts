@@ -1,4 +1,4 @@
-import { MAX_SCORE, MIN_SCORE, GAME_DURATION_SECONDS, MAX_PLAYER_NAME_LENGTH } from '../model/constants'
+import { GAME_DURATION_SECONDS, MAX_PLAYER_NAME_LENGTH } from '../model/constants'
 import type { LeaderboardEntry } from '../model/types'
 
 /**
@@ -48,7 +48,7 @@ export function validateGameChecksum(entry: LeaderboardEntry): boolean {
 }
 
 /**
- * Validate score is within reasonable bounds
+ * Validate score is a finite integer
  */
 export function isValidScore(score: number): boolean {
   if (!Number.isFinite(score)) {
@@ -57,11 +57,6 @@ export function isValidScore(score: number): boolean {
 
   // Score must be an integer
   if (!Number.isInteger(score)) {
-    return false
-  }
-
-  // Score must be within valid range
-  if (score < MIN_SCORE || score > MAX_SCORE) {
     return false
   }
 

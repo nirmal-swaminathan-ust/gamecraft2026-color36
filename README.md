@@ -16,7 +16,7 @@ Color36 is an original, fast-paced 60-second visual reaction game built with Rea
 
 - The objective is to score as many points as possible in exactly 60 seconds.
 - A 6x6 grid of 36 tiles is shown, each tile with a random digit (0-9) and a random color (red, blue, green, or yellow).
-- A target appears below the grid. It is either:
+- A target appears above the grid. It is either:
   - **NUMBER target**: click every tile showing the requested digit.
   - **COLOR target**: ignore the word itself and click every tile whose color matches the target's font color.
 - Every clicked tile changes its digit and color.
@@ -27,7 +27,7 @@ Color36 is an original, fast-paced 60-second visual reaction game built with Rea
 
 1. Enter your player name (up to 30 characters) on the welcome screen.
 2. Read the instructions modal and press **START GAME**.
-3. Watch the target panel below the grid and click all matching tiles as fast as you can.
+3. Watch the target panel above the grid and click all matching tiles as fast as you can.
 4. Keep completing targets until the 60-second timer runs out.
 5. View your final score, stats, and the Top 10 leaderboard, then press replay to try again.
 

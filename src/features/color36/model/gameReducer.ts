@@ -9,16 +9,9 @@ import {
   validatePlayerName,
 } from '../utils/gameLogic'
 import type { GameAction, GameState, Target, Tile } from './types'
-import { MAX_SCORE, MIN_SCORE } from './constants'
 
 // Validate score changes to prevent manipulation
 function validateScore(newScore: number, oldScore: number, isCorrectClick: boolean): number {
-  // Score must be within bounds
-  if (newScore < MIN_SCORE || newScore > MAX_SCORE) {
-    console.warn('Score out of bounds:', newScore)
-    return oldScore
-  }
-
   // Score change should be exactly +1 or -1 based on action
   const diff = newScore - oldScore
   if (isCorrectClick && diff !== 1) {

@@ -9,6 +9,7 @@ export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScree
   return (
     <div className="screen-shell">
       <div className="panel-card welcome-panel">
+        <p className="welcome-header">Welcome to GameCraft 2026!</p>
         <h1>COLOR36</h1>
         <p className="subtitle">THE 60-SECOND CHALLENGE</p>
 

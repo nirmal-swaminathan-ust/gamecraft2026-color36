@@ -15,7 +15,7 @@ export function InstructionsModal({ isOpen, onClose, onStart }: InstructionsModa
         <h2 id="instructions-title">HOW TO PLAY</h2>
         <ul className="instruction-list">
           <li>You have exactly 60 seconds.</li>
-          <li>Follow the target shown below the grid.</li>
+          <li>Follow the target shown above the grid.</li>
           <li>NUMBER targets: click every tile with the requested digit.</li>
           <li>COLOR targets: ignore the word and click every tile whose color matches the target font color.</li>
           <li>Correct tile: +1.</li>
