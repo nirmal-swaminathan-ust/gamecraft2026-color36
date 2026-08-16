@@ -9,6 +9,29 @@ import {
   validatePlayerName,
 } from '../utils/gameLogic'
 import type { GameAction, GameState, Target, Tile } from './types'
+import { MAX_SCORE, MIN_SCORE } from './constants'
+
+// Validate score changes to prevent manipulation
+function validateScore(newScore: number, oldScore: number, isCorrectClick: boolean): number {
+  // Score must be within bounds
+  if (newScore < MIN_SCORE || newScore > MAX_SCORE) {
+    console.warn('Score out of bounds:', newScore)
+    return oldScore
+  }
+
+  // Score change should be exactly +1 or -1 based on action
+  const diff = newScore - oldScore
+  if (isCorrectClick && diff !== 1) {
+    console.warn('Invalid score change for correct click:', diff)
+    return oldScore + 1
+  }
+  if (!isCorrectClick && diff !== -1) {
+    console.warn('Invalid score change for incorrect click:', diff)
+    return oldScore - 1
+  }
+
+  return newScore
+}
 
 export function getInitialGameState(): GameState {
   return {
@@ -149,9 +172,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           const refreshedTiles = refreshResolvedTiles(nextTiles)
           const nextTargetData = createTargetFromType(getNextTargetType(), refreshedTiles)
 
+          const newScore = validateScore(state.score + 1, state.score, true)
+
           return {
             ...state,
-            score: state.score + 1,
+            score: newScore,
             correctClicks: state.correctClicks + 1,
             tiles: refreshedTiles,
             target: nextTargetData.target,
@@ -161,18 +186,22 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           }
         }
 
+        const newScore = validateScore(state.score + 1, state.score, true)
+
         return {
           ...state,
-          score: state.score + 1,
+          score: newScore,
           correctClicks: state.correctClicks + 1,
           tiles: nextTiles,
           completedTargetTileIds: nextCompleted,
         }
       }
 
+      const newScore = validateScore(state.score - 1, state.score, false)
+
       return {
         ...state,
-        score: state.score - 1,
+        score: newScore,
         incorrectClicks: state.incorrectClicks + 1,
         tiles: nextTiles,
       }

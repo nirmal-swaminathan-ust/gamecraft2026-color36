@@ -21,11 +21,14 @@ export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScree
           className="name-input"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          maxLength={30}
+          maxLength={10}
           placeholder="Enter your name"
           aria-invalid={Boolean(error)}
-          aria-describedby={error ? 'player-name-error' : undefined}
+          aria-describedby={error ? 'player-name-error' : 'player-name-hint'}
         />
+        <p id="player-name-hint" className="form-hint">
+          Maximum 10 characters
+        </p>
         {error ? (
           <p id="player-name-error" className="form-error" role="alert">
             {error}

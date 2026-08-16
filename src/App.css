@@ -42,7 +42,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 6px 10px;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #1f2937;
 }
@@ -262,6 +262,14 @@
   text-align: left;
   color: #b91c1c;
   font-weight: 700;
+}
+
+.form-hint {
+  margin: 4px 0 16px;
+  text-align: left;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .primary-button,

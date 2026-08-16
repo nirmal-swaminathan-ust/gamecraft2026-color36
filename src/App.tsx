@@ -36,15 +36,15 @@ function App() {
       return
     }
 
-    const entry = {
-      playerName: state.playerName,
-      score: state.score,
-      createdAt: new Date().toISOString(),
-    }
-
-    const updated = addLeaderboardEntry(entry)
-    setLeaderboard(updated)
-  }, [state.status, state.playerName, state.score])
+    const entry = addLeaderboardEntry(
+      state.playerName,
+      state.score,
+      state.correctClicks,
+      state.incorrectClicks,
+      state.completedTargets,
+    )
+    setLeaderboard(entry)
+  }, [state.status, state.playerName, state.score, state.correctClicks, state.incorrectClicks, state.completedTargets])
 
   const personalBest = useMemo(() => {
     const matches = leaderboard.filter((entry) => entry.playerName.toLowerCase() === state.playerName.toLowerCase())

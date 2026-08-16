@@ -38,3 +38,10 @@ export const WORD_TO_DIGIT = {
 export const NUMBER_WORDS = Object.values(DIGIT_TO_WORD)
 export const COLOR_WORDS = ['RED', 'BLUE', 'GREEN', 'YELLOW'] as const
 export const STORAGE_KEY = 'color36_leaderboard'
+
+// Security constants
+export const MAX_SCORE = 60 // Maximum possible score (one per second for 60 seconds)
+export const MIN_SCORE = -60 // Minimum possible score (worst case)
+export const GAME_DURATION_SECONDS = 60
+export const CHECKSUM_ALGORITHM = 'SHA256' // For data integrity
+export const MAX_PLAYER_NAME_LENGTH = 10

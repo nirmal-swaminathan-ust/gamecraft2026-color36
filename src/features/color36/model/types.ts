@@ -43,6 +43,12 @@ export interface LeaderboardEntry {
   playerName: string
   score: number
   createdAt: string
+  // Game metadata for validation
+  correctClicks?: number
+  incorrectClicks?: number
+  completedTargets?: number
+  gameChecksum?: string // Cryptographic verification
+  version?: number // For future updates
 }
 
 export interface GameState {

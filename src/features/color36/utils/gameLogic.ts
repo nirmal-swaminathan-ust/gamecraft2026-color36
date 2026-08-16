@@ -1,5 +1,6 @@
-import { COLORS, DIGIT_TO_WORD, WORD_TO_DIGIT } from '../model/constants'
+import { COLORS, DIGIT_TO_WORD, WORD_TO_DIGIT, MAX_PLAYER_NAME_LENGTH } from '../model/constants'
 import type { ColorTarget, Digit, NumberTarget, Target, Tile, TileColor } from '../model/types'
+import { sanitizePlayerName } from './security'
 
 export function isCorrectTile(tile: Tile, target: Target): boolean {
   if (target.type === 'number') {
@@ -10,13 +11,13 @@ export function isCorrectTile(tile: Tile, target: Target): boolean {
 }
 
 export function validatePlayerName(name: string): string | null {
-  const normalized = name.trim()
+  const normalized = sanitizePlayerName(name)
 
   if (!normalized) {
     return null
   }
 
-  if (normalized.length > 30) {
+  if (normalized.length > MAX_PLAYER_NAME_LENGTH) {
     return null
   }
 

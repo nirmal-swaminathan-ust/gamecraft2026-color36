@@ -1,21 +1,6 @@
 import type { LeaderboardEntry } from '../model/types'
 import { STORAGE_KEY } from '../model/constants'
-
-export function isValidLeaderboardEntry(value: unknown): value is LeaderboardEntry {
-  if (typeof value !== 'object' || value === null) {
-    return false
-  }
-
-  const record = value as Record<string, unknown>
-
-  return (
-    typeof record.playerName === 'string' &&
-    record.playerName.trim().length > 0 &&
-    typeof record.score === 'number' &&
-    Number.isFinite(record.score) &&
-    typeof record.createdAt === 'string'
-  )
-}
+import { isValidLeaderboardEntry, generateGameChecksum } from './security'
 
 export function compareLeaderboardEntries(a: LeaderboardEntry, b: LeaderboardEntry): number {
   return b.score - a.score || a.createdAt.localeCompare(b.createdAt)
@@ -56,7 +41,29 @@ export function saveLeaderboard(entries: LeaderboardEntry[]): void {
   }
 }
 
-export function addLeaderboardEntry(entry: LeaderboardEntry): LeaderboardEntry[] {
+export function addLeaderboardEntry(
+  playerName: string,
+  score: number,
+  correctClicks: number,
+  incorrectClicks: number,
+  completedTargets: number,
+): LeaderboardEntry[] {
+  const createdAt = new Date().toISOString()
+
+  // Generate checksum for data integrity
+  const gameChecksum = generateGameChecksum(playerName, score, correctClicks, incorrectClicks, completedTargets, createdAt)
+
+  const entry: LeaderboardEntry = {
+    playerName,
+    score,
+    createdAt,
+    correctClicks,
+    incorrectClicks,
+    completedTargets,
+    gameChecksum,
+    version: 1,
+  }
+
   const existing = loadLeaderboard()
   const next = [...existing, entry].filter(isValidLeaderboardEntry)
   const sorted = sortLeaderboardEntries(next)
