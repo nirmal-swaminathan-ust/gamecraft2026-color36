@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 interface InstructionsModalProps {
   isOpen: boolean
   onStart: () => void
@@ -5,13 +7,27 @@ interface InstructionsModalProps {
 }
 
 export function InstructionsModal({ isOpen, onStart, buttonLabel = 'START' }: InstructionsModalProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      buttonRef.current?.focus()
+    }
+  }, [isOpen])
+
   if (!isOpen) {
     return null
   }
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
-      <div className="modal-card">
+      <form
+        className="modal-card"
+        onSubmit={(event) => {
+          event.preventDefault()
+          onStart()
+        }}
+      >
         <h2 id="instructions-title">HOW TO PLAY</h2>
         <ul className="instruction-list">
           <li>You have exactly 60 seconds.</li>
@@ -25,11 +41,11 @@ export function InstructionsModal({ isOpen, onStart, buttonLabel = 'START' }: In
           <li>The game automatically ends at 0 seconds.</li>
         </ul>
         <div className="modal-actions">
-          <button type="button" className="primary-button" onClick={onStart}>
+          <button ref={buttonRef} type="submit" className="primary-button">
             {buttonLabel}
           </button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

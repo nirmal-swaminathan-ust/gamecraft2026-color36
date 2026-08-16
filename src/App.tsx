@@ -143,15 +143,6 @@ function App() {
           onStart={handleInstructionsAction}
           buttonLabel={state.status === 'instructions' ? 'START' : 'RESUME'}
         />
-        <div className="screen-shell">
-          <div className="panel-card info-panel">
-            <h2>READY TO PLAY?</h2>
-            <p>Welcome, {state.playerName}. Press start when you're ready.</p>
-            <button type="button" className="primary-button" onClick={handleStartGame}>
-              START GAME
-            </button>
-          </div>
-        </div>
       </div>
     )
   }
