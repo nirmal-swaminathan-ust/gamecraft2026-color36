@@ -25,7 +25,7 @@ Color36 is an original, fast-paced 60-second visual reaction game built with Rea
 
 ## How to Play
 
-1. Enter your player name (up to 30 characters) on the welcome screen.
+1. Enter your player name (up to 10 characters) on the welcome screen.
 2. Read the instructions modal and press **START GAME**.
 3. Watch the target panel above the grid and click all matching tiles as fast as you can.
 4. Keep completing targets until the 60-second timer runs out.
@@ -53,10 +53,16 @@ Color36 is an original, fast-paced 60-second visual reaction game built with Rea
 - [ESLint](https://eslint.org/) for linting
 - CSS (no UI framework)
 
-## AI Tool Used
+## AI Tool Used and Its Contribution
+
+- ChatGPT 
+  1. to generate well-defined, optimized prompts.
 
 - GitHub Copilot (agent mode in VS Code)
-- ChatGPT for Prompt Optimizations
+  1. to code and develop the entire project end-to-end.
+  2. to write tests and validate it.
+  3. to optimize cybersecurity.
+
 
 ## Launch Instructions
 
