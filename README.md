@@ -1,2 +1,1 @@
-# gamecraft2026-color36
 Color36 is an original, fast-paced 60-second visual reaction game built with React, TypeScript, and Vite. Players identify number or color targets, earn points for correct clicks, lose points for mistakes, and compete for a local Top 10 high score.
