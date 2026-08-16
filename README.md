@@ -1,4 +1,4 @@
-# Color36
+# GameCraft 2026 - Color36
 
 ## Participant / Team Name
 
@@ -8,9 +8,13 @@ Nirmal Swaminathan (UST ID: 253202)
 
 INDIVIDUAL
 
+## Game Name
+
+Color36
+
 ## Brief Description
 
-Color36 is an original, fast-paced 60-second visual reaction game built with React, TypeScript, and Vite. Players identify number or color targets, earn points for correct clicks, lose points for mistakes, and compete for a local Top 10 high score.
+Color36 is an original, 60-second fast-paced visual reaction game built with React, TypeScript, and Vite. Players identify number or color targets, earn points for correct clicks, lose points for mistakes, and compete for a local Top 10 high score.
 
 ## Objective and Rules
 
@@ -60,8 +64,8 @@ Color36 is an original, fast-paced 60-second visual reaction game built with Rea
 
 - GitHub Copilot (agent mode in VS Code)
   1. to code and develop the entire project end-to-end.
-  2. to write tests and validate it.
-  3. to optimize cybersecurity.
+  2. to write, run and validate tests.
+  3. for secure coding practices and cybersecurity optimizations.
 
 
 ## Launch Instructions
