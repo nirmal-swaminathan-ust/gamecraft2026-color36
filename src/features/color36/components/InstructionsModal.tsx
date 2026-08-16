@@ -2,9 +2,10 @@ interface InstructionsModalProps {
   isOpen: boolean
   onClose: () => void
   onStart: () => void
+  showStartButton?: boolean
 }
 
-export function InstructionsModal({ isOpen, onClose, onStart }: InstructionsModalProps) {
+export function InstructionsModal({ isOpen, onClose, onStart, showStartButton = true }: InstructionsModalProps) {
   if (!isOpen) {
     return null
   }
@@ -28,9 +29,11 @@ export function InstructionsModal({ isOpen, onClose, onStart }: InstructionsModa
           <button type="button" className="secondary-button" onClick={onClose}>
             CLOSE
           </button>
-          <button type="button" className="primary-button" onClick={onStart}>
-            START GAME
-          </button>
+          {showStartButton ? (
+            <button type="button" className="primary-button" onClick={onStart}>
+              START GAME
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

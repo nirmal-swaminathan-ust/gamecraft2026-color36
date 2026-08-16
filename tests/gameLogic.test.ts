@@ -136,6 +136,20 @@ describe('game reducer', () => {
     expect(state.status).toBe('finished')
   })
 
+  it('keeps the player on the pre-start instructions screen when the modal is closed', () => {
+    let state = getInitialGameState()
+    state = gameReducer(state, { type: 'SUBMIT_PLAYER_NAME', playerName: 'Alex' })
+
+    expect(state.status).toBe('instructions')
+    expect(state.showInstructions).toBe(true)
+
+    state = gameReducer(state, { type: 'CLOSE_INSTRUCTIONS' })
+
+    expect(state.status).toBe('instructions')
+    expect(state.showInstructions).toBe(false)
+    expect(state.timeRemaining).toBe(60)
+  })
+
   it('handles correct and wrong clicks with scoring and blacking the clicked tile', () => {
     let state = {
       ...getInitialGameState(),

@@ -94,10 +94,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       }
     }
     case 'CLOSE_INSTRUCTIONS': {
+      if (state.status === 'finished') {
+        return {
+          ...state,
+          showInstructions: false,
+          status: 'finished',
+        }
+      }
+
       return {
         ...state,
         showInstructions: false,
-        status: state.status === 'finished' ? 'finished' : 'playing',
+        status: state.status === 'instructions' ? 'instructions' : 'playing',
       }
     }
     case 'START_GAME': {

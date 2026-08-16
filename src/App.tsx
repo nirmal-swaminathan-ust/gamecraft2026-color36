@@ -133,6 +133,7 @@ function App() {
           isOpen={state.showInstructions}
           onClose={() => dispatch({ type: 'CLOSE_INSTRUCTIONS' })}
           onStart={handleStartGame}
+          showStartButton={state.status === 'instructions'}
         />
         <div className="screen-shell">
           <div className="panel-card info-panel">
@@ -210,6 +211,7 @@ function App() {
           isOpen={state.showInstructions}
           onClose={() => dispatch({ type: 'CLOSE_INSTRUCTIONS' })}
           onStart={handleStartGame}
+          showStartButton={state.status === 'instructions'}
         />
       ) : null}
     </div>
