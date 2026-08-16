@@ -150,6 +150,17 @@ describe('game reducer', () => {
     expect(state.timeRemaining).toBe(60)
   })
 
+  it('resumes an active game when the instructions modal is dismissed via the resume action', () => {
+    let state = gameReducer(getInitialGameState(), { type: 'START_GAME' })
+    state = { ...state, showInstructions: true }
+
+    state = gameReducer(state, { type: 'CLOSE_INSTRUCTIONS' })
+
+    expect(state.status).toBe('playing')
+    expect(state.showInstructions).toBe(false)
+    expect(state.timeRemaining).toBe(60)
+  })
+
   it('handles correct and wrong clicks with scoring and blacking the clicked tile', () => {
     let state = {
       ...getInitialGameState(),

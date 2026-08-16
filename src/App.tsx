@@ -84,6 +84,15 @@ function App() {
     dispatch({ type: 'START_GAME' })
   }
 
+  const handleInstructionsAction = () => {
+    if (state.status === 'playing' && state.showInstructions) {
+      dispatch({ type: 'CLOSE_INSTRUCTIONS' })
+      return
+    }
+
+    handleStartGame()
+  }
+
   const handleTileClick = (tileId: string) => {
     if (state.status !== 'playing') {
       return
@@ -131,9 +140,8 @@ function App() {
       <div className="app-shell">
         <InstructionsModal
           isOpen={state.showInstructions}
-          onClose={() => dispatch({ type: 'CLOSE_INSTRUCTIONS' })}
-          onStart={handleStartGame}
-          showStartButton={state.status === 'instructions'}
+          onStart={handleInstructionsAction}
+          buttonLabel={state.status === 'instructions' ? 'START' : 'RESUME'}
         />
         <div className="screen-shell">
           <div className="panel-card info-panel">
@@ -209,9 +217,8 @@ function App() {
       {state.showInstructions ? (
         <InstructionsModal
           isOpen={state.showInstructions}
-          onClose={() => dispatch({ type: 'CLOSE_INSTRUCTIONS' })}
-          onStart={handleStartGame}
-          showStartButton={state.status === 'instructions'}
+          onStart={handleInstructionsAction}
+          buttonLabel={state.status === 'instructions' ? 'START' : 'RESUME'}
         />
       ) : null}
     </div>

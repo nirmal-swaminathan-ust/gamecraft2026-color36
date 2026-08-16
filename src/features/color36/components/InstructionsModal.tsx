@@ -1,11 +1,10 @@
 interface InstructionsModalProps {
   isOpen: boolean
-  onClose: () => void
   onStart: () => void
-  showStartButton?: boolean
+  buttonLabel?: 'START' | 'RESUME'
 }
 
-export function InstructionsModal({ isOpen, onClose, onStart, showStartButton = true }: InstructionsModalProps) {
+export function InstructionsModal({ isOpen, onStart, buttonLabel = 'START' }: InstructionsModalProps) {
   if (!isOpen) {
     return null
   }
@@ -26,14 +25,9 @@ export function InstructionsModal({ isOpen, onClose, onStart, showStartButton = 
           <li>The game automatically ends at 0 seconds.</li>
         </ul>
         <div className="modal-actions">
-          <button type="button" className="secondary-button" onClick={onClose}>
-            CLOSE
+          <button type="button" className="primary-button" onClick={onStart}>
+            {buttonLabel}
           </button>
-          {showStartButton ? (
-            <button type="button" className="primary-button" onClick={onStart}>
-              START GAME
-            </button>
-          ) : null}
         </div>
       </div>
     </div>

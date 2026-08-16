@@ -1,14 +1,34 @@
+import { useEffect, useRef, type FormEvent } from 'react'
+
 interface WelcomeScreenProps {
   name: string
-  setName: (value: string) => void
-  error: string
+  setName: (name: string) => void
+  error: string | null
   onContinue: () => void
 }
 
 export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScreenProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // 1. Automatically focus the text input immediately when the component mounts
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  // 2. Prevent page reload and submit the form when hitting Enter
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    // Guard clause to ensure empty or whitespace-only entries don't submit accidentally
+    if (!name.trim()) return 
+    onContinue()
+  }
+
+  // 3. Button is disabled if the trimmed name is empty
+  const isButtonDisabled = !name.trim()
+
   return (
     <div className="screen-shell">
-      <div className="panel-card welcome-panel">
+      <form className="panel-card welcome-panel" onSubmit={handleSubmit}>
         <p className="welcome-header">Welcome to GameCraft 2026!</p>
         <h1>COLOR36</h1>
         <p className="subtitle">THE 60-SECOND CHALLENGE</p>
@@ -17,6 +37,7 @@ export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScree
           Player Name
         </label>
         <input
+          ref={inputRef}
           id="player-name"
           type="text"
           className="name-input"
@@ -28,7 +49,7 @@ export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScree
           aria-describedby={error ? 'player-name-error' : 'player-name-hint'}
         />
         <p id="player-name-hint" className="form-hint">
-          Maximum 10 characters
+          Max 10 characters. Letters, numbers, and mid spaces only.
         </p>
         {error ? (
           <p id="player-name-error" className="form-error" role="alert">
@@ -36,10 +57,14 @@ export function WelcomeScreen({ name, setName, error, onContinue }: WelcomeScree
           </p>
         ) : null}
 
-        <button type="button" className="primary-button" onClick={onContinue}>
+        <button 
+          type="submit" 
+          className="primary-button"
+          disabled={isButtonDisabled}
+        >
           CONTINUE
         </button>
-      </div>
+      </form>
     </div>
   )
 }
