@@ -76,4 +76,5 @@ export type GameAction =
   | { type: 'OPEN_INSTRUCTIONS' }
   | { type: 'CLOSE_INSTRUCTIONS' }
   | { type: 'REPLAY' }
+  | { type: 'EXIT_TO_WELCOME' }
   | { type: 'RECORD_LEADERBOARD'; playerName: string; score: number }

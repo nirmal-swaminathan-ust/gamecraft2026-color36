@@ -117,6 +117,13 @@ function App() {
     setShowLeaderboard(false)
   }
 
+  const handleExitToWelcome = () => {
+    setNameInput('')
+    setNameError('')
+    setShowLeaderboard(false)
+    dispatch({ type: 'EXIT_TO_WELCOME' })
+  }
+
   const handleViewLeaderboard = () => {
     setShowLeaderboard(true)
     window.requestAnimationFrame(() => {
@@ -166,6 +173,7 @@ function App() {
           completedTargets={state.completedTargets}
           onReplay={handleReplay}
           onViewLeaderboard={handleViewLeaderboard}
+          onExit={handleExitToWelcome}
           personalBest={personalBest}
           entries={leaderboard}
         />

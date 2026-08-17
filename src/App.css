@@ -327,6 +327,7 @@
 
 .primary-button,
 .secondary-button,
+.exit-button,
 .ghost-button {
   border: none;
   border-radius: 14px;
@@ -347,6 +348,11 @@
   color: #0f172a;
 }
 
+.exit-button {
+  background: #3d2a20;
+  color: white;
+}
+
 .ghost-button {
   background: transparent;
   border: 1px solid #cbd5e1;
@@ -355,12 +361,14 @@
 
 .primary-button:hover,
 .secondary-button:hover,
+.exit-button:hover,
 .ghost-button:hover {
   transform: translateY(-1px);
 }
 
 .primary-button:focus-visible,
 .secondary-button:focus-visible,
+.exit-button:focus-visible,
 .ghost-button:focus-visible,
 .game-tile:focus-visible {
   outline: 3px solid #111827;

@@ -240,6 +240,18 @@ describe('game reducer', () => {
     expect(state.targetTileIds.size).toBeGreaterThan(0)
     expect(state.tiles).toHaveLength(36)
   })
+
+  it('returns to the welcome screen when the session is exited', () => {
+    let state = gameReducer(getInitialGameState(), { type: 'START_GAME' })
+    state = gameReducer(state, { type: 'CLICK_TILE', tileId: Array.from(state.targetTileIds)[0] })
+    state = gameReducer(state, { type: 'EXIT_TO_WELCOME' })
+
+    expect(state.status).toBe('welcome')
+    expect(state.playerName).toBe('')
+    expect(state.score).toBe(0)
+    expect(state.timeRemaining).toBe(60)
+    expect(state.showInstructions).toBe(false)
+  })
 })
 
 describe('leaderboard utilities', () => {

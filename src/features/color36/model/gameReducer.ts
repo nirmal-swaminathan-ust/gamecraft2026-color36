@@ -213,6 +213,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         playerName: state.playerName,
       })
     }
+    case 'EXIT_TO_WELCOME': {
+      return getInitialGameState()
+    }
     default:
       return state
   }

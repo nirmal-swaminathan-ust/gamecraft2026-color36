@@ -8,6 +8,7 @@ interface GameOverScreenProps {
   completedTargets: number
   onReplay: () => void
   onViewLeaderboard: () => void
+  onExit: () => void
   personalBest: number
   entries: LeaderboardEntry[]
 }
@@ -20,6 +21,7 @@ export function GameOverScreen({
   completedTargets,
   onReplay,
   onViewLeaderboard,
+  onExit,
   personalBest,
   entries,
 }: GameOverScreenProps) {
@@ -66,10 +68,13 @@ export function GameOverScreen({
 
         <div className="modal-actions">
           <button type="button" className="primary-button" onClick={onReplay}>
-            PLAY AGAIN
+            RETRY
           </button>
           <button type="button" className="secondary-button" onClick={onViewLeaderboard}>
             LEADERBOARD
+          </button>
+          <button type="button" className="exit-button" onClick={onExit}>
+            EXIT
           </button>
         </div>
 
