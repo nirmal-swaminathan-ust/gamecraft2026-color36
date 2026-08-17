@@ -80,7 +80,7 @@ export function GameOverScreen({
 
         {entries.length > 0 ? (
           <div className="mini-leaderboard">
-            <h3>TOP 10</h3>
+            <h3>TOP 5</h3>
             <ol>
               {entries.slice(0, 5).map((entry, index) => (
                 <li key={`${entry.playerName}-${entry.createdAt}-${index}`}>
